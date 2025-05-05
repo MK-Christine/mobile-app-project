@@ -1,10 +1,22 @@
 
 import { Colors } from '@/constants/Colors';
-import react from 'react';
+import { useState } from 'react';
 import {View, Text, Image, TextInput, TouchableOpacity, Alert, ScrollView} from 'react-native';
 
 
 function Signup({navigation}) {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+
+
+    const abc = () => {
+        alert(email);
+    }
+
   return (
     <ScrollView>
         <View style={{alignContents: 'center', alignItems: 'center', marginTop: 10}}>
@@ -29,6 +41,8 @@ function Signup({navigation}) {
                     paddingLeft: 10,
                     marginTop: 10
                 }}
+                onChangeText={text => setFirstName(text)}
+                
               
               />
               <TextInput 
@@ -42,7 +56,7 @@ function Signup({navigation}) {
                   paddingLeft: 10,
                   marginTop: 10
               }}
-            
+              onChangeText={text => setLastName(text)}
           />
             
             <TextInput 
@@ -56,6 +70,7 @@ function Signup({navigation}) {
                     paddingLeft: 10,
                     marginTop: 20
                 }}
+                onChangeText={text => setEmail(text)}   
             />
             <TextInput 
                 placeholder="new password"
@@ -69,6 +84,7 @@ function Signup({navigation}) {
                     marginTop: 10
                 }}
               secureTextEntry={true}
+                onChangeText={text => setPassword(text)}
             />
              <TextInput 
                 placeholder="Comfirm password"
@@ -82,6 +98,7 @@ function Signup({navigation}) {
                     marginTop: 10
                 }}
               secureTextEntry={true}
+                onChangeText={text => setConfirmPassword(text)}
             />
             
             <TouchableOpacity
@@ -94,8 +111,7 @@ function Signup({navigation}) {
                     justifyContent: 'center',
                     marginTop: 20
                 }}
-                onPress={() => alert('Login button pressed')}
-            >
+                onPress={abc}>
                 <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>Signup</Text>
             </TouchableOpacity>
 
