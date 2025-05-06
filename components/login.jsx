@@ -2,9 +2,41 @@
 import { Colors } from '@/constants/Colors';
 import react from 'react';
 import {View, Text, Image, TextInput, TouchableOpacity, Alert} from 'react-native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Login({navigation}) {
+
+    const [email, setEmail] = react.useState('');
+    const [password, setPassword] = react.useState('');
+
+
+    const checkCredentials = async() => {
+        
+        if (email === '' || password === '') {
+            
+            alert("Error!",'Please fill all fields');
+        } 
+        else {
+            await fetch(`http://192.168.137.68/pharmacy/login.php?em=${email}&pass=${password}`)
+                .then((response) => response.text())
+                .then(data=> {
+                   const results = JSON.parse(data);
+                   
+                   if(results.status == 1){
+                    AsyncStorage.setItem('user', data);
+                    navigation.navigate('home');
+                   }
+                     else if(results.status == 0){
+                      Alert.alert("Error!",'Invalid credentials');
+                     }
+                }
+            )
+        }
+    }
+
+
+    
+
   return (
     <View>
         <View style={{alignContents: 'center', alignItems: 'center', marginTop: 10}}>
@@ -30,7 +62,11 @@ function Login({navigation}) {
                     paddingLeft: 10,
                     marginTop: 20
                 }}
-            />
+                
+
+            onChangeText={(text) => setEmail(text)}
+                />
+            
             <TextInput 
                 placeholder="Password"
                 style={{
@@ -43,6 +79,7 @@ function Login({navigation}) {
                     marginTop: 10
                 }}
               secureTextEntry={true}
+              onChangeText={(text) => setPassword(text)}
             />
             <TouchableOpacity
                 style={{
@@ -54,7 +91,7 @@ function Login({navigation}) {
                     justifyContent: 'center',
                     marginTop: 20
                 }}
-                onPress={() => alert('Login button pressed')}
+                onPress={() => checkCredentials()}
             >
                 <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>LOGIN</Text>
             </TouchableOpacity>

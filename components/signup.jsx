@@ -13,8 +13,25 @@ function Signup({navigation}) {
     const [lastName, setLastName] = useState('');
 
 
-    const abc = () => {
-        alert(email);
+    const abc = async() => {
+
+        if (email === '' || password === '' || confirmPassword === '' || firstName === '' || lastName === '') {
+            Alert.alert("Error!",'Please fill all fields');
+        } 
+        else if (password !== confirmPassword) {
+            Alert.alert("Error",'Passwords do not match');
+        } else {
+            
+            await fetch(`http://192.168.137.68/pharmacy/signup.php?em=${email}&npass=${password}&fn=${firstName}&ln=${lastName}`)
+            .then((response) => response.text())
+            .then((data) => {
+                if(data==1){
+                    navigation.navigate('login');
+                }
+            })
+
+            
+        }
     }
 
   return (
