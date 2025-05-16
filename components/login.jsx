@@ -3,6 +3,8 @@ import { Colors } from '@/constants/Colors';
 import react from 'react';
 import {View, Text, Image, TextInput, TouchableOpacity, Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Url from '../constants/url';
+
 
 function Login({navigation}) {
 
@@ -17,7 +19,7 @@ function Login({navigation}) {
             alert("Error!",'Please fill all fields');
         } 
         else {
-            await fetch(`http://192.168.137.68/pharmacy/login.php?em=${email}&pass=${password}`)
+            await fetch(`${Url}login.php?em=${email}&pass=${password}`)
                 .then((response) => response.text())
                 .then(data=> {
                    const results = JSON.parse(data);

@@ -2,7 +2,7 @@
 import { Colors } from '@/constants/Colors';
 import { useState } from 'react';
 import {View, Text, Image, TextInput, TouchableOpacity, Alert, ScrollView} from 'react-native';
-
+import Url from '../constants/url';
 
 function Signup({navigation}) {
 
@@ -22,7 +22,7 @@ function Signup({navigation}) {
             Alert.alert("Error",'Passwords do not match');
         } else {
             
-            await fetch(`http://192.168.137.68/pharmacy/signup.php?em=${email}&npass=${password}&fn=${firstName}&ln=${lastName}`)
+            await fetch(`${Url}signup.php?em=${email}&npass=${password}&fn=${firstName}&ln=${lastName}`)
             .then((response) => response.text())
             .then((data) => {
                 if(data==1){

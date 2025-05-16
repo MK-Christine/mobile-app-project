@@ -1,0 +1,1 @@
+export default Url = "http://10.8.27.124/pharmacy/";
