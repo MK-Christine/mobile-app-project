@@ -4,8 +4,9 @@ import {useState, useEffect} from 'react';
 import { View, Text, ScrollView, TextInput,TouchableOpacity} from 'react-native';
 
 import Url from '../constants/url';
+import { navigate } from 'expo-router/build/global-state/routing';
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const [products, setProducts] = useState([]);
 
   const getProducts = async () => {
@@ -18,13 +19,13 @@ const Home = () => {
     })
   }
 
-  // useEffect(() => {
+  useEffect(() => {
     
     
       getProducts();
   
     
-  // },[]);
+  },[]);
 
   return (
       
@@ -54,6 +55,7 @@ const Home = () => {
             color: 'white',
             paddingVertical: 15,
           }}
+          onPress={() => navigation.navigate('add')}
           >
           <Text style={{fontSize: 30, fontWeight: 'bold', color: 'white'}}>+</Text>
       </TouchableOpacity>
@@ -69,6 +71,7 @@ const Home = () => {
             color: 'white',
             paddingVertical: 15,
           }}
+          onPress={() => navigation.navigate('sell')}
           >
           <Text style={{fontSize: 30, fontWeight: 'bold', color: 'white'}}>-</Text>
       </TouchableOpacity>
@@ -107,10 +110,10 @@ const Home = () => {
           }}
           onPress={() => alert(prod.id)}
           >
-          <Text style={{fontSize: 25, fontWeight: 'bold', color: ''}}>
+          <Text style={{fontSize: 16, fontWeight: 'bold', color: ''}}>
             {prod.productname}
           </Text>
-          <Text style={{fontSize: 16, fontWeight: '', color: '#777', marginTop: 5}}>
+          <Text style={{fontSize: 14, fontStyle: 'italic', color: '#777', marginTop: 5}}>
             Quantity: {prod.quantity}
           </Text>
         </TouchableOpacity>

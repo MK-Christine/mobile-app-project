@@ -16,7 +16,7 @@ function Login({navigation}) {
         
         if (email === '' || password === '') {
             
-            alert("Error!",'Please fill all fields');
+            Alert.alert("Error!",'Please fill all fields');
         } 
         else {
             await fetch(`${Url}login.php?em=${email}&pass=${password}`)
@@ -64,8 +64,12 @@ function Login({navigation}) {
                     paddingLeft: 10,
                     marginTop: 20
                 }}
-                
-
+            
+                autoCapitalize='none'
+                autoCorrect={false}
+                keyboardType='email-address'
+                textContentType='emailAddress'
+                autoComplete='email'
             onChangeText={(text) => setEmail(text)}
                 />
             
@@ -80,6 +84,8 @@ function Login({navigation}) {
                     paddingLeft: 10,
                     marginTop: 10
                 }}
+                autoCapitalize='none'
+                autoComplete='password'
               secureTextEntry={true}
               onChangeText={(text) => setPassword(text)}
             />
