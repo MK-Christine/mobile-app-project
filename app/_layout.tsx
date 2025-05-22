@@ -6,6 +6,8 @@ import Login from '../components/login'; // Import your Login component
 import Home from '../components/home'; // Import your Home component
 import AddProduct from '../components/addproduct'; // Import your AddProduct component
 import Sellproduct from '../components/sellproduct'; // Import your SellProduct component
+import Details from '../components/details'; // Import your Details component
+import Edit from '../components/edit'; // Import your EditJS component
 
 
 
@@ -26,6 +28,8 @@ export default function RootLayout() {
                       <Stack.Screen name="home" component={Home} />
                       <Stack.Screen name="add" component={AddProduct} />
                       <Stack.Screen name="sell" component={Sellproduct} />
+                      <Stack.Screen name="details" component={Details} />
+                      <Stack.Screen name="edit" component={Edit} />
             
                     </Stack.Navigator>
     

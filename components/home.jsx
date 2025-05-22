@@ -4,7 +4,6 @@ import {useState, useEffect} from 'react';
 import { View, Text, ScrollView, TextInput,TouchableOpacity} from 'react-native';
 
 import Url from '../constants/url';
-import { navigate } from 'expo-router/build/global-state/routing';
 
 const Home = ({ navigation }) => {
   const [products, setProducts] = useState([]);
@@ -26,6 +25,20 @@ const Home = ({ navigation }) => {
   
     
   },[]);
+
+
+  const search = async (text) => {
+    if (text === '') {
+      getProducts();
+    } else {
+      await fetch(`${Url}/search.php?search=${text}`)
+        .then((response) => response.text())
+        .then((data) => {
+          const products = JSON.parse(data);
+          setProducts(products);
+        });
+    }
+  }
 
   return (
       
@@ -88,6 +101,7 @@ const Home = ({ navigation }) => {
           borderRadius: 10,
           paddingLeft: 10,
         }}
+        onChangeText={(text) => search(text)}
       />
       </View>
      <ScrollView style={{marginTop: 0}}>
@@ -108,7 +122,7 @@ const Home = ({ navigation }) => {
             backgroundColor: '#f0f0f0',
             marginBottom: 5,
           }}
-          onPress={() => alert(prod.id)}
+          onPress={() => navigation.navigate('details', {'id':prod.id})}
           >
           <Text style={{fontSize: 16, fontWeight: 'bold', color: ''}}>
             {prod.productname}
